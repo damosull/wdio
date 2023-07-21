@@ -1,0 +1,22 @@
+
+--- Adding Retries for flaky tests  ---
+
+NB Note *****************:
+  I followed the notes, but wasn't 100% sure it worked, & wasn't able to find a working example online
+
+WDIO Documentation: https://webdriver.io/docs/retry/
+
+Flaky test = inconsistent results
+
+For these kinds of tests, we can add retries if there's a high chance the test will pass the next time.
+
+All you need to do is add `this.retries(4)` to your code.
+
+If you add this within a `describe()` block, all tests in the suite are retried up to 4 times.
+If you add this within an `it()` block, only that test will be retried up to 4 times.
+
+Note: If you want to use retries, you need to use an unbound function [function(){}] instead of fat arrow [() => {}]. The reasoning is in the Mocha docs, but won't go into it here, we just need to know that you need to do it.
+
+Look in the logs to see that it's being run multiple times
+If the test failed for all retries, you should see Expected vs Received values for the number of times you re-ran the test.
+If the test passed the 2nd time, you should only see that it ran twice
